@@ -1,7 +1,7 @@
 {
   #inputs.nixpkgs.url = "nixpkgs/master";
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  #inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+  #inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
 
   # Some dependencies of this flake are not yet available on non linux systems
   inputs.flake-utils.url = "github:numtide/flake-utils";
