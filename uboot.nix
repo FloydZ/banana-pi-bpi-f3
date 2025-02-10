@@ -5,7 +5,7 @@
 buildUBoot {
   src = {
     owner = "BPI-SINOVOIP";
-    repo = "pi-u-boot";
+    repo = "pi-u-boot.git";
     rev = "v2022.10-k1";
     hash = "";
   };

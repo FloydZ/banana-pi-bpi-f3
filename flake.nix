@@ -75,7 +75,7 @@
 
               # Additional configuration goes here
               sdImage.compressImage = false;
-              system.stateVersion = "24.05";
+              system.stateVersion = "24.11";
             };
           inherit system;
         }).config.system.build.sdImage;

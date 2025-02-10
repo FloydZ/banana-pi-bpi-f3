@@ -1,5 +1,4 @@
-{
-  pkgs,
+{ pkgs,
   config,
   lib,
   ...
@@ -7,8 +6,9 @@
 {
   boot = {
     # consoleLogLevel = lib.mkDefault 7;
-    kernelPackages = lib.mkDefault (pkgs.callPackage ./linux-6.1.nix {
-      inherit (config.boot);
+    kernelPackages = pkgs.linuxPackagesFor (pkgs.callPackage ./linux-6.1.nix {
+      #kernelPackages = lib.mkDefault (pkgs.callPackage ./linux-6.1.nix {
+      inherit (config.boot) kernelPatches;
     });
     #initrd.availableKe3rnelModules = [ "dw_mmc_starfive" ];
 
