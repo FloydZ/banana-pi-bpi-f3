@@ -1,0 +1,13 @@
+diff --git a/drivers/misc/icm42607.c b/drivers/misc/icm42607.c
+index 8ac6532075..cd46edcf5c 100644
+--- a/drivers/misc/icm42607.c
++++ b/drivers/misc/icm42607.c
+@@ -553,7 +553,7 @@ struct attribute_group icm42607_attrs = {
+ 	.attrs = icm42607_sysfs_attrs,
+ };
+ 
+-int icm42607_probe(struct i2c_client *client, const struct i2c_device_id *devid)
++int icm42607_probe(struct i2c_client *client)
+ {
+ 	struct icm42607_device *mpu;
+ 	int err;

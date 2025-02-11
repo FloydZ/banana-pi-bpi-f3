@@ -7,13 +7,21 @@ let
   modDirVersion = "6.6.36";
 in
 buildLinux (args // {
-  inherit kernelPatches modDirVersion;
+  #inherit kernelPatches modDirVersion;
+  inherit modDirVersion;
   version = "${modDirVersion}-k1";
   src = fetchgit {
     url = "https://github.com/BPI-SINOVOIP/pi-linux";
     rev = "7b25153f8744304c5212d1d4de4dbf51e9e2eb7e";
     hash = "sha256-dnB6Y+MfCBXmlSdnLPdAQOlLHYg9KmTIdV5MzgSk2YU=";
   };
+  NIX_CFLAGS_COMPILE = "-Wno-error";
+  kernelPatches = [
+    {
+        name = "fix_build";
+        patch = ./kernel.patch;
+    }
+  ];
 
   defconfig = "k1_defconfig";
   extraMeta.branch = "linux-6.6.36-k1";
