@@ -17,12 +17,6 @@
         "aarch64-darwin"
       ];
       forAllSupportedSystems = nixpkgs.lib.genAttrs supportedSystems;
-      # packageOverrides = pkgs: {
-      #   samba = pkgs.samba.override {
-      #     disallowedReferences = [];
-      #   };
-      # };
-
   in {
       packages = forAllSupportedSystems (system: rec {
         default = sd-image;
@@ -34,18 +28,19 @@
                 # ./sd-image-installer.nix
               ];
 
-              nixpkgs.overlays = [
-                (final: prev: {
-                  samba = prev.samba.overrideAttrs (old: {
-                    disallowedReferences = [];
-                  });
-                })
-              ];
-
-              nixpkgs.crossSystem = {
-                config = "riscv64-unknown-linux-gnu";
-                system = "riscv64-linux";
-              };
+              #nixpkgs.overlays = [
+              #  (final: prev: {
+              #    samba = prev.samba.overrideAttrs (old: {
+              #      disallowedReferences = [];
+              #    });
+              #  })
+              #];
+              nixpkgs.buildPlatform.system = system;
+              nixpkgs.hostPlatform.system = "riscv64-linux";
+              #nixpkgs.crossSystem = {
+              #  config = "riscv64-unknown-linux-gnu";
+              #  system = "riscv64-linux";
+              #};
               # If you want to use ssh set a password
               users.users.duda = {
                 isNormalUser = true;

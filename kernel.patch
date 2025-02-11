@@ -11,3 +11,16 @@ index 8ac6532075..cd46edcf5c 100644
  {
  	struct icm42607_device *mpu;
  	int err;
+diff --git a/drivers/spi/spi-dw-espi.c b/drivers/spi/spi-dw-espi.c
+index 3bb27be374..87dda10266 100644
+--- a/drivers/spi/spi-dw-espi.c
++++ b/drivers/spi/spi-dw-espi.c
+@@ -1180,7 +1180,7 @@ int dw_spi_ext_add_host(struct device *dev, struct dw_spi *dws)
+ 	if (dws->mem_ops.exec_op)
+ 		master->mem_ops = &dws->mem_ops;
+ 	master->max_speed_hz = dws->max_freq;
+-	master->flags = SPI_MASTER_GPIO_SS;
++	master->flags = SPI_CONTROLLER_GPIO_SS;
+ 	master->auto_runtime_pm = true;
+ 
+ 	/* Get default rx sample delay */
