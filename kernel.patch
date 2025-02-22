@@ -1,3 +1,18 @@
+diff --git a/arch/riscv/Makefile b/arch/riscv/Makefile
+index 7b7cee89f6..0f814dcbbb 100644
+--- a/arch/riscv/Makefile
++++ b/arch/riscv/Makefile
+@@ -179,8 +179,8 @@ Image.%: Image Image.gz
+ 	$(Q)$(MAKE) $(build)=$(boot) $(bootvars-y) $(boot)/$@
+ 
+ #BPI
+-#install: KBUILD_IMAGE := $(boot)/Image
+-install: KBUILD_IMAGE := $(boot)/Image.itb
++install: KBUILD_IMAGE := $(boot)/Image
++#install: KBUILD_IMAGE := $(boot)/Image.itb
+ zinstall: KBUILD_IMAGE := $(boot)/Image.gz
+ install zinstall:
+ 	$(call cmd,install)
 diff --git a/drivers/misc/icm42607.c b/drivers/misc/icm42607.c
 index 8ac6532075..cd46edcf5c 100644
 --- a/drivers/misc/icm42607.c
