@@ -22,13 +22,13 @@ buildLinux (args // {
     }
   ];
 
-    #defconfig = "k1_defconfig";
-    configFile = ./k1_defconfig;
+  defconfig = "k1_defconfig";
+  #configFile = ./k1_defconfig;
   extraMeta.branch = "linux-6.6.36-k1";
   structuredExtraConfig = with lib.kernel; {
       #CMDLINE = freeform "console=ttyS0,115200 console=tty1";
       #CMDLINE_EXTEND = yes;
-      #DISTRO_GENERIC_KERNEL = yes;
+    DISTRO_GENERIC_KERNEL = yes;
     COMPILE_TEST=no;
 
     WLAN_VENDOR_REALTEK = no;
@@ -48,6 +48,6 @@ buildLinux (args // {
     PWM_DWC_K1PRO = no;
       
     SPI_DESIGNWARE_EXT = no;
-      #VIRTIO_PCI = "m";
+    VIRTIO_PCI = yes;
   };
 } // (args.argsOverride or { }))
