@@ -10,6 +10,14 @@
       #kernelPackages = lib.mkDefault (pkgs.callPackage ./linux-6.1.nix {
       inherit (config.boot) kernelPatches;
     });
+    # same as armbian's bananapif3 extraargs
+    kernelParams = [
+      "console=tty1"
+      "console=ttyS0,115200n8"
+      "earlycon=sbi"
+      "clk_ignore_unused"
+      "pcie_aspm=off"
+    ];
     #initrd.availableKe3rnelModules = [ "dw_mmc_starfive" ];
 
     # Support booting SD-image from NVME SSD

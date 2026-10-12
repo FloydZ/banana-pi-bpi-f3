@@ -1,0 +1,26 @@
+diff --git a/board/spacemit/k1-x/k1-x.env b/board/spacemit/k1-x/k1-x.env
+index 0be8d66b..ed44b3c4 100644
+--- a/board/spacemit/k1-x/k1-x.env
++++ b/board/spacemit/k1-x/k1-x.env
+@@ -1,6 +1,6 @@
+ // Environment boot order SDCARD NVME MMC
+ 
+-bootfunc=if test -e ${devtype} ${devnum}:${distro_bootpart} /extlinux/extlinux.conf; then \
++bootpart=if test -e ${devtype} ${devnum}:${distro_bootpart} /extlinux/extlinux.conf; then \
+ 		echo "Booting from ${devtype} ${devnum}:${distro_bootpart} ..."; \
+ 		sysboot ${devtype} ${devnum}:${distro_bootpart} any ${kernel_addr_r} /extlinux/extlinux.conf; \
+ 	elif test -e ${devtype} ${devnum}:${distro_bootpart} /boot/extlinux/extlinux.conf; then \
+@@ -14,6 +14,13 @@ bootfunc=if test -e ${devtype} ${devnum}:${distro_bootpart} /extlinux/extlinux.c
+ 		load ${devtype} ${devnum}:${distro_bootpart} ${kernel_addr_r} EFI/BOOT/BOOTRISCV64.EFI; bootefi ${kernel_addr_r}; \
+ 	fi;
+ 
++// NixOS keeps /boot on the second (root) partition, the first is an empty FAT
++// firmware partition, so scan both.
++bootfunc=for part in 1 2; do \
++		setenv distro_bootpart ${part}; \
++		run bootpart; \
++	done;
++
+ autoboot=echo ""; \
+ 	echo "Loading K1 environment"; \
+ 	setenv devnum 0; \
